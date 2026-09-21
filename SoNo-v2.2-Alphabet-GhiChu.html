@@ -337,6 +337,95 @@ svg{display:block}
  .detail-back{font-size:11px;min-height:34px;padding:7px 10px}
  .release-tag{font-size:9px}
 }
+
+/* v2.2: người nợ A-Z, chi tiết một hàng, ghi chú dài không bị cắt hay tràn. */
+.detail-back-row,.person-card{display:none!important}
+.detail-compact{display:flex;align-items:center;gap:9px;flex:none;padding:9px 12px;border-radius:18px;min-height:58px;max-width:100%;overflow:visible}
+.detail-arrow,.compact-edit{display:grid;place-items:center;flex:none;width:34px;height:34px;background:#eff6ff;border:1px solid #d9e9fc;border-radius:11px;color:#126fd6}
+.compact-edit{width:30px;height:30px;background:transparent;border-color:transparent;color:#7b89a2}
+.detail-arrow svg{width:19px;height:19px}.compact-edit svg{width:17px;height:17px}
+.detail-arrow:focus-visible,.compact-edit:focus-visible,.id-short:focus-visible{outline:2px solid #0b73e8;outline-offset:2px}
+.detail-identity{display:flex;flex:1;flex-direction:column;min-width:0;gap:3px}
+.detail-person-name{display:block;font-size:19px;font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.detail-person-sub{font-size:10px;color:#8a98ad}
+.detail-person-total{flex:none;display:flex;flex-direction:column;justify-content:center;padding:6px 10px;background:#f0f7ff;border:1px solid #dceaff;border-radius:12px;min-width:85px;max-width:36%;gap:3px;overflow:hidden}
+.detail-person-total small{color:#7e8da1;font-size:10px;font-weight:700;white-space:nowrap}
+.detail-person-total strong{font-size:16px;color:#1474dc;font-weight:850;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.detail-compact>.person-history{flex:none;position:relative;margin:0;width:34px;height:34px;border-radius:11px}
+.home-person{min-width:0}.home-chevron{display:none}.home-person-amount{flex:none}
+.cell-id{min-width:0}.id-full{display:inline}.id-short{display:none}
+.cell-note{min-width:0!important;max-width:100%;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;word-break:break-word;line-height:1.42;padding:5px 0}
+.row,.hist-row{height:auto!important;min-height:58px;align-items:center}
+.table-wrap,.table-body{min-width:0;max-width:100%}
+.table-head,.row{grid-template-columns:minmax(0,1.12fr) minmax(0,.8fr) minmax(0,1.65fr) minmax(0,.92fr) minmax(0,1.15fr)}
+.hist-head,.hist-row{grid-template-columns:minmax(0,1.08fr) minmax(0,.8fr) minmax(0,1.65fr) minmax(0,.92fr) minmax(0,1.05fr)}
+.table-head>div,.row>div,.hist-head>div,.hist-row>div{min-width:0}
+.row>.cell-id,.hist-row>.cell-id{font-variant-numeric:tabular-nums}
+/* Trên điện thoại: 4 cột căn thẳng, ghi chú nằm trọn chiều ngang ở dòng dưới. */
+@media(max-width:540px){
+ .app{gap:7px!important;padding-left:8px!important;padding-right:8px!important}
+ .workspace{gap:7px!important;min-height:0}
+ .detail-compact{padding:6px 8px;gap:5px;min-height:47px;border-radius:15px}
+ .detail-arrow{width:29px;height:30px;border-radius:9px}.detail-arrow svg{width:18px;height:18px}
+ .compact-edit{width:24px;height:28px}.compact-edit svg{width:15px;height:15px}
+ .detail-person-name{font-size:clamp(13px,4vw,17px)}.detail-person-sub{font-size:9px}
+ .detail-person-total{min-width:0;max-width:31%;padding:5px 7px;border-radius:10px;gap:2px}
+ .detail-person-total small{font-size:8px}.detail-person-total strong{font-size:clamp(10px,3.3vw,14px)}
+ .detail-compact>.person-history{height:30px;width:30px;border-radius:9px}
+ .detail-compact>.person-history svg{width:16px;height:16px}
+ .section-head{padding:6px 8px!important}
+ .table-wrap{margin:0 6px 6px!important;min-height:0}
+ .table-head,.row{grid-template-columns:minmax(0,1.08fr) minmax(0,.84fr) minmax(0,.95fr) 86px!important;gap:4px!important;padding-left:6px!important;padding-right:6px!important;min-width:0}
+ .table-head>div:nth-child(3){display:none}
+ .table-head>div:nth-child(1),.row>.cell-id{grid-column:1;grid-row:1}
+ .table-head>div:nth-child(2),.row>.cell-money{grid-column:2;grid-row:1}
+ .table-head>div:nth-child(4),.row>.cell-date{grid-column:3;grid-row:1}
+ .table-head>div:nth-child(5),.row>.actions{grid-column:4;grid-row:1}
+ .table-head{height:34px!important;min-height:34px!important;font-size:9px!important;align-items:center}
+ .row{grid-template-rows:minmax(45px,auto) auto;min-height:60px!important;padding-top:4px;padding-bottom:7px;font-size:10px}
+ .row .cell-id{font-size:10px!important}.row .cell-money{font-size:10px!important;white-space:nowrap}
+ .id-full{display:none!important}.id-short{display:block!important;font-size:inherit;font-family:inherit;color:#283a56;background:transparent;padding:2px 0;border:0;max-width:100%;white-space:nowrap;text-align:left;font-weight:700}
+ .row .cell-note{grid-column:1/-1;grid-row:2;background:#f6f9ff;border-radius:7px;padding:6px 8px;margin:1px 0 0;line-height:1.5;font-size:11px!important;color:#52647f;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important;overflow:visible!important;text-overflow:clip!important}
+ .row .cell-note::before{content:'Ghi chú: ';font-weight:750;color:#536882}
+ .row .cell-date{font-size:8.4px!important;line-height:1.25}
+ .row .date-day,.row .date-clock{display:block;white-space:nowrap}
+ .row .actions{display:flex;gap:3px;min-width:0;justify-content:flex-end}
+ .row .act{width:25px;height:28px;flex:none;border-radius:8px;padding:0;display:grid;place-items:center}
+ .row .act svg{width:14px;height:14px}
+ .hist-head,.hist-row{grid-template-columns:minmax(0,1.06fr) minmax(0,.83fr) minmax(0,.96fr) 61px!important;gap:3px!important;padding-left:6px!important;padding-right:6px!important}
+ .hist-head>div:nth-child(3){display:none}
+ .hist-head>div:nth-child(1),.hist-row>.cell-id{grid-column:1;grid-row:1}
+ .hist-head>div:nth-child(2),.hist-row>.cell-money{grid-column:2;grid-row:1}
+ .hist-head>div:nth-child(4),.hist-row>.cell-date{grid-column:3;grid-row:1}
+ .hist-head>div:nth-child(5),.hist-row>.actions{grid-column:4;grid-row:1}
+ .hist-head{min-height:32px;font-size:8.5px!important}
+ .hist-row{grid-template-rows:minmax(44px,auto) auto;min-height:61px;padding-top:4px;padding-bottom:7px;font-size:9px!important}
+ .hist-row .cell-date{font-size:8px!important}
+ .hist-row .cell-note{grid-column:1/-1;grid-row:2;background:#f2faf6;border-radius:7px;padding:6px 8px;margin:1px 0 0;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important;font-size:10.5px!important}
+ .hist-row .cell-note::before{content:'Ghi chú: ';font-weight:750;color:#536882}
+ .hist-row .actions{display:flex;gap:3px;justify-content:flex-end}
+ .hist-row .act{width:26px;height:29px;padding:0;display:grid;place-items:center;border-radius:8px}
+ .hist-row .act svg{width:13px;height:13px}
+ .home-person{gap:7px;padding-left:9px;padding-right:9px}
+}
+@media(min-width:541px){
+ .table-head,.row{grid-template-columns:minmax(0,1fr) minmax(0,.85fr) minmax(0,1.55fr) minmax(0,.98fr) 122px!important;gap:5px;padding-left:9px;padding-right:9px}
+ .hist-head,.hist-row{grid-template-columns:minmax(0,1fr) minmax(0,.85fr) minmax(0,1.55fr) minmax(0,.98fr) 90px!important;gap:5px;padding-left:9px;padding-right:9px}
+ .id-full{display:none!important}.id-short{display:inline!important;font-size:inherit;color:#283a56;background:transparent;border:0;padding:1px 0;text-align:left}
+ .row .actions,.hist-row .actions{gap:5px!important;justify-content:flex-end}
+ .row .act,.hist-row .act{width:34px;height:34px;flex:none;padding:0;display:grid;place-items:center}
+ .row .act span,.hist-row .act span{display:none}
+ .row .act svg,.hist-row .act svg{width:16px;height:16px}
+ .cell-note{overflow-wrap:anywhere!important;white-space:normal!important}
+}
+@media(max-width:350px){
+ .detail-compact{gap:3px;padding:5px}
+ .detail-person-total{max-width:29%;padding:5px}
+ .table-head,.row{grid-template-columns:minmax(0,1fr) minmax(0,.83fr) minmax(0,.93fr) 78px!important;gap:2px!important;padding-left:4px!important;padding-right:4px!important}
+ .row .actions{gap:2px}.row .act{width:23px;height:26px}.row .cell-date{font-size:8px!important}
+ .hist-head,.hist-row{grid-template-columns:minmax(0,1fr) minmax(0,.82fr) minmax(0,.96fr) 57px!important;gap:2px!important}
+ .hist-row .act{width:24px}
+}
 </style>
 </head>
 <body>
