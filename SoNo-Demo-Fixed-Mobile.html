@@ -176,108 +176,50 @@ svg{display:block}
   .segment{margin-top:5px}.segment button{height:28px}.section-head{height:31px;min-height:31px}.composer{padding:5px}.nav{height:48px}
 }
 
+
+/* Các thành phần mới sử dụng lại toàn bộ màu, font, icon, bảng của bản giao diện đã duyệt. */
+.chip.ok{background:#effbf5;color:#18865b;border-color:#d3eadc}
+.top-add{margin-left:auto;display:flex;align-items:center;gap:7px;background:linear-gradient(145deg,#2d97ff,#1271e6);color:#fff;font-size:15px;font-weight:750;border-radius:13px;padding:8px 11px;white-space:nowrap}
+.top-add svg{width:17px;height:17px}
+.home-card{display:flex;flex:1;min-height:0;flex-direction:column}
+.home-list{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+.home-person{min-height:79px;border-bottom:1px solid var(--line2);display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer;background:#fff}
+.home-person:active{background:#f2f7ff}.home-person:last-child{border-bottom:none}
+.home-avatar{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;background:#def4e8;color:#16885d;font-size:17px;font-weight:800}
+.home-person:nth-child(3n+2) .home-avatar{background:#e5efff;color:#246fc6}.home-person:nth-child(3n+3) .home-avatar{background:#f1e8fb;color:#8e5ac3}
+.home-person-info{display:flex;flex-direction:column;gap:7px;min-width:0;flex:1}.home-person-info strong{font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.home-person-info small{font-size:13px;color:#8390a4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.home-person-amount{font-size:18px;color:#2179dd;white-space:nowrap;font-variant-numeric:tabular-nums}.home-chevron{color:#93a1b6}
+.home-delete{flex:none}.empty{color:#8795aa;padding:25px 12px;text-align:center;font-size:14px;line-height:1.5}
+.avatar-back{border:0;cursor:pointer}.avatar-back:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sheet-form{display:flex;flex-direction:column;gap:13px}.sheet-form label{display:flex;flex-direction:column;gap:6px;font-size:15px;color:#586b87;font-weight:650}
+.setting-input{border:1px solid #d8e3f1;background:#fff;border-radius:13px;min-height:44px;padding:10px 12px;width:100%;font-size:16px;color:var(--text);outline:none}
+.setting-input:focus{border-color:var(--blue);box-shadow:0 0 0 2px #157cf31b}
+.sheet-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.sheet-btn{border:1px solid #d8e8fc;border-radius:12px;min-height:42px;padding:9px 13px;font-weight:740;font-size:15px;display:flex;align-items:center;justify-content:center;gap:7px}
+.sheet-btn svg{width:17px;height:17px}.sheet-btn.primary{color:#fff;border-color:var(--blue);background:var(--blue)}.sheet-btn.light{background:#eff6ff;color:#186ed6}
+.sheet-choice{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px;min-height:49px;display:flex;align-items:center;justify-content:space-between;color:var(--text);font-size:15px}
+.sheet-choice svg{width:17px;height:17px}.subtle{font-size:13px;color:#8390a2;line-height:1.5;margin:0}
+@media(max-width:600px){
+ .top-add{font-size:10px;gap:2px;padding:5px 8px;border-radius:9px;height:27px}.top-add svg{width:13px;height:13px}
+ .home-person{min-height:58px;padding:6px 8px;gap:7px}.home-avatar{width:35px;height:35px;font-size:12px}
+ .home-person-info{gap:4px}.home-person-info strong{font-size:13px}.home-person-info small{font-size:10px}
+ .home-person-amount{font-size:12px}.home-chevron svg{width:13px;height:13px}.home-delete{height:26px;width:26px}
+ .sheet-form{gap:9px}.sheet-form label{font-size:11px;gap:4px}.setting-input{min-height:39px;font-size:13px}
+ .sheet-btn{min-height:36px;font-size:11px;padding:7px 9px}.sheet-choice{min-height:39px;padding:9px;font-size:11px}.subtle{font-size:10px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="header">
-    <div class="logo">đ</div>
-    <div class="brand"><h1>Sổ Nợ</h1><p>Quản lý công nợ</p></div>
-    <div class="chips">
-      <button class="chip" id="loginBtn">
-        <span class="ico" id="googleIcon"></span>
-        <span class="copy"><strong>Đăng nhập Google</strong></span>
-      </button>
-      <button class="chip warn" id="fbBtn">
-        <span class="ico" id="cloudIcon"></span>
-        <span class="copy"><strong>Firebase</strong><small>Chưa cấu hình</small></span>
-      </button>
-    </div>
-  </header>
-
-  <section class="summary card">
-    <div class="bag" id="bagIcon"></div>
-    <div class="main"><strong>Tổng nợ chưa thu</strong><div class="amt" id="totalDebt">0 đ</div></div>
-    <div class="meta"><span id="summaryMeta">0 người • 0 mã chưa thu</span><span id="chevIcon"></span></div>
-  </section>
-
-  <div class="workspace">
-    <section class="person-card card">
-      <div class="person-top">
-        <div class="avatar" id="avatarText">MH</div>
-        <div class="person-info">
-          <h2 id="personName">Mạ Hiệu</h2>
-          <div class="person-meta">
-            <span id="phoneIcon"></span>
-            <span id="personPhone">Chưa có số điện thoại</span>
-            <button class="iconbtn-inline" id="editPersonBtn"></button>
-          </div>
-        </div>
-        <div class="mini-balance">
-          <strong>Tổng nợ chưa thu</strong>
-          <div class="amt" id="personTotal">0 đ</div>
-        </div>
-      </div>
-      <div class="segment">
-        <button class="active" type="button" id="tabDebts"><span id="listIcon"></span>Khoản nợ (<span id="debtCount">0</span>)</button>
-        <button type="button" id="historyBtn"><span id="historyIcon"></span>Lịch sử (<span id="histCount">0</span>)</button>
-      </div>
-    </section>
-
-    <section class="section card">
-      <div class="section-head">
-        <span id="docIcon"></span>
-        <h3>Danh sách mã nợ</h3>
-        <div class="right" id="tableMeta">0 khoản • Tổng: 0 đ</div>
-      </div>
-      <div class="table-wrap">
-        <div class="table-head">
-          <div>Mã nợ</div><div>Số tiền</div><div>Ghi chú</div><div>Ngày</div><div>Thao tác</div>
-        </div>
-        <div class="table-body" id="debtRows"></div>
-      </div>
-    </section>
-
-    <section class="composer card">
-      <div class="composer-head">
-        <div class="plusball" id="plusIcon"></div>
-        <h4 id="composerTitle">Thêm khoản nợ</h4>
-        <div class="hint"><span id="infoIcon"></span>Enter 2 lần để lưu nhanh</div>
-      </div>
-      <div class="entry">
-        <div class="field"><span id="moneyFieldIcon"></span><input id="amountInput" placeholder="Số tiền (đ)" inputmode="decimal"></div>
-        <div class="field"><span id="noteFieldIcon"></span><input id="noteInput" placeholder="Ghi chú (ví dụ: Tiền ăn trưa)"></div>
-        <button class="submit" id="saveDebtBtn"><span id="submitPlusIcon"></span>Thêm</button>
-      </div>
-    </section>
-  </div>
-
-  <nav class="nav">
-    <button class="active"><span id="navPeopleIcon"></span>Người nợ</button>
-    <button id="navHistoryBtn"><span id="navHistoryIcon"></span>Lịch sử</button>
-    <button><span id="navBackupIcon"></span>Sao lưu</button>
-    <button><span id="navSettingsIcon"></span>Cài đặt</button>
-  </nav>
+<header class="header"><div class="logo">đ</div><div class="brand"><h1>Sổ Nợ</h1><p>Quản lý công nợ</p></div><div class="chips"><button class="chip" id="loginBtn" type="button"><span class="ico" id="googleIcon"></span><span class="copy"><strong>Đăng nhập Google</strong></span></button><button class="chip warn" id="fbBtn" type="button"><span class="ico" id="cloudIcon"></span><span class="copy"><strong>Firebase</strong><small>Chưa cấu hình</small></span></button></div></header>
+<section class="summary card"><div class="bag" id="bagIcon"></div><div class="main"><strong>Tổng nợ chưa thu</strong><div class="amt" id="totalDebt">0 đ</div></div><div class="meta"><span id="summaryMeta">0 người • 0 mã chưa thu</span><span id="chevIcon"></span></div></section>
+<main class="workspace" id="workspace"></main>
+<nav class="nav"><button data-nav="people" type="button"><span id="navPeopleIcon"></span>Người nợ</button><button data-nav="history" type="button"><span id="navHistoryIcon"></span>Lịch sử</button><button data-nav="backup" type="button"><span id="navBackupIcon"></span>Sao lưu</button><button data-nav="settings" type="button"><span id="navSettingsIcon"></span>Cài đặt</button></nav>
 </div>
-
-<div class="modal-backdrop hidden" id="historyModal">
-  <div class="sheet">
-    <div class="sheet-head">
-      <h3 id="historyTitle">Lịch sử của Mạ Hiệu</h3>
-      <button class="iconbtn-inline" id="closeHistoryBtn"></button>
-    </div>
-    <div class="sheet-body">
-      <div class="notice">Chỉ hiển thị các khoản đã thu của <b id="historyName">Mạ Hiệu</b>. Hoàn tác sẽ đưa mã trở lại danh sách chưa thu. Xoá lịch sử sẽ xoá vĩnh viễn mã đã trả.</div>
-      <div class="histbox">
-        <div class="hist-head"><div>Mã nợ</div><div>Số tiền</div><div>Ghi chú</div><div>Ngày thu</div><div>Thao tác</div></div>
-        <div id="historyRows"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="toast hidden" id="toast"></div>
-
+<div class="modal-backdrop hidden" id="overlay"><div class="sheet"><div class="sheet-head"><h3 id="sheetTitle">Chi tiết</h3><button class="iconbtn-inline" type="button" id="closeSheet" aria-label="Đóng"></button></div><div class="sheet-body" id="sheetBody"></div></div></div>
+<input id="fileImport" type="file" accept=".json,application/json" hidden><div class="toast hidden" id="toast" role="status"></div>
 <script>
 const icons = {
   google:`<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.5 3.9-5.5 3.9-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.4 14.6 2.5 12 2.5A9.5 9.5 0 1 0 12 21.5c5.5 0 9.1-3.8 9.1-9.2 0-.6-.1-1.1-.2-1.6H12z"/><path fill="#FBBC05" d="M3.6 7.4l3.2 2.4C7.7 7.6 9.6 6 12 6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.4 14.6 2.5 12 2.5 8.3 2.5 5.1 4.6 3.6 7.4z"/><path fill="#34A853" d="M12 21.5c2.5 0 4.7-.8 6.3-2.3l-2.9-2.3c-.8.6-1.8 1.1-3.4 1.1-3.9 0-5.3-2.6-5.5-3.8l-3.3 2.5c1.5 2.8 4.5 4.8 8.8 4.8z"/><path fill="#4285F4" d="M3.2 16.7l3.3-2.5c-.2-.5-.3-1-.3-1.7 0-.6.1-1.2.3-1.7L3.2 8.3C2.6 9.5 2.2 10.7 2.2 12s.4 2.5 1 3.7z"/></svg>`,
@@ -302,112 +244,93 @@ const icons = {
   trash:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2m3 0-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m5 4v8m4-8v8"/></svg>`,
   undo:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 1 1-6 10"/></svg>`
 };
-const seed = {
-  person:{id:'p1',name:'Mạ Hiệu',phone:''},
-  debts:[
-    {id:'N-594E1896AE',amount:10000,note:'Tiền cà phê',createdAt:'2026-09-21T12:26:00',status:'open'},
-    {id:'N-6D2AF180C1',amount:50000,note:'Ăn trưa',createdAt:'2026-09-20T11:15:00',status:'open'},
-    {id:'N-184A23DF09',amount:100000,note:'Mượn gấp',createdAt:'2026-09-19T08:30:00',status:'open'},
-    {id:'N-A7F3B92C10',amount:200000,note:'Tiền xăng',createdAt:'2026-09-18T17:42:00',status:'open'},
-    {id:'N-C91D0E7785',amount:150000,note:'Mua đồ',createdAt:'2026-09-17T09:12:00',status:'open'},
-    {id:'N-7C1E3F9A22',amount:200000,note:'Thanh toán',createdAt:'2026-09-15T12:00:00',paidAt:'2026-09-15T14:20:00',status:'paid'},
-    {id:'N-3B9D118F44',amount:150000,note:'Trả nợ',createdAt:'2026-09-12T08:00:00',paidAt:'2026-09-12T10:05:00',status:'paid'}
-  ]
-};
-const KEY='sono_exact_demo_v1';
-let state;try{state=JSON.parse(localStorage.getItem(KEY) || 'null')}catch{};if(!state||!state.person||!Array.isArray(state.debts))state=structuredClone(seed);
-let editingId = null;
-function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
-function fmt(n){ return new Intl.NumberFormat('vi-VN').format(n) + ' đ'; }
-function fmtDate(s){ const d = new Date(s); const dd=String(d.getDate()).padStart(2,'0'); const mm=String(d.getMonth()+1).padStart(2,'0'); const hh=String(d.getHours()).padStart(2,'0'); const mi=String(d.getMinutes()).padStart(2,'0'); return `${dd}-${mm} ${hh}:${mi}`; }
-function qs(id){ return document.getElementById(id); }
-function esc(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
-function toast(msg){ const el=qs('toast'); el.textContent=msg; el.classList.remove('hidden'); clearTimeout(window._toast); window._toast=setTimeout(()=>el.classList.add('hidden'),2200); }
-function setIcons(){
-  qs('googleIcon').innerHTML=icons.google; qs('cloudIcon').innerHTML=icons.cloud; qs('bagIcon').innerHTML=icons.bag; qs('chevIcon').innerHTML=icons.chevron;
-  qs('phoneIcon').innerHTML=icons.phone; qs('editPersonBtn').innerHTML=icons.edit; qs('listIcon').innerHTML=icons.list; qs('historyIcon').innerHTML=icons.history;
-  qs('docIcon').innerHTML=icons.doc; qs('plusIcon').innerHTML=icons.plus; qs('infoIcon').innerHTML=icons.info; qs('moneyFieldIcon').innerHTML=icons.moneyInput;
-  qs('noteFieldIcon').innerHTML=icons.note; qs('submitPlusIcon').innerHTML=icons.plus; qs('navPeopleIcon').innerHTML=icons.users; qs('navHistoryIcon').innerHTML=icons.history;
-  qs('navBackupIcon').innerHTML=icons.upload; qs('navSettingsIcon').innerHTML=icons.settings; qs('closeHistoryBtn').innerHTML=icons.close;
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('vi-VN').format(n)+' đ';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateTime=s=>new Date(s).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+const shortDate=s=>new Date(s).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'});
+const KEY='sono-full-local-v1', CFG_KEY='sono-firebase-config-v1';
+const sample=()=>({version:4,ownerUid:null,demo:true,people:[{id:'P-MAU',name:'Mạ Hiệu',phone:'',createdAt:'2026-09-21T12:00:00.000Z',updatedAt:1,deletedAt:null}],debts:[
+{id:'N-594E1896AE',personId:'P-MAU',amount:10000,note:'Tiền cà phê',createdAt:'2026-09-21T05:26:00.000Z',updatedAt:1,paidAt:null,status:'open',deletedAt:null},
+{id:'N-6D2AF180C1',personId:'P-MAU',amount:50000,note:'Ăn trưa',createdAt:'2026-09-20T04:15:00.000Z',updatedAt:1,paidAt:null,status:'open',deletedAt:null},
+{id:'N-184A23DF09',personId:'P-MAU',amount:100000,note:'Mượn gấp',createdAt:'2026-09-19T01:30:00.000Z',updatedAt:1,paidAt:null,status:'open',deletedAt:null},
+{id:'N-A7F3B92C10',personId:'P-MAU',amount:200000,note:'Tiền xăng',createdAt:'2026-09-18T10:42:00.000Z',updatedAt:1,paidAt:null,status:'open',deletedAt:null},
+{id:'N-C91D0E7785',personId:'P-MAU',amount:150000,note:'Mua đồ',createdAt:'2026-09-17T02:12:00.000Z',updatedAt:1,paidAt:null,status:'open',deletedAt:null},
+{id:'N-7C1E3F9A22',personId:'P-MAU',amount:200000,note:'Thanh toán',createdAt:'2026-09-15T05:00:00.000Z',updatedAt:1,paidAt:'2026-09-15T07:20:00.000Z',status:'paid',deletedAt:null},
+{id:'N-3B9D118F44',personId:'P-MAU',amount:150000,note:'Trả nợ',createdAt:'2026-09-12T01:00:00.000Z',updatedAt:1,paidAt:'2026-09-12T03:05:00.000Z',status:'paid',deletedAt:null}]});
+let state;try{state=JSON.parse(localStorage.getItem(KEY)||'null')}catch{}
+if(!state||!Array.isArray(state.people)||!Array.isArray(state.debts)){
+ let old;try{old=JSON.parse(localStorage.getItem('sono_exact_demo_v1')||'null')}catch{}
+ if(old?.person&&Array.isArray(old.debts)){
+  const p=old.person;
+  state={version:4,ownerUid:null,demo:false,people:[{id:p.id||uid('P'),name:p.name||'Người nợ',phone:p.phone||'',createdAt:new Date().toISOString(),updatedAt:1,deletedAt:null}],debts:old.debts.map(d=>({id:d.id||uid('N'),personId:p.id||'P-MAU',amount:Number(d.amount)||0,note:d.note||'',createdAt:d.createdAt||new Date().toISOString(),updatedAt:1,paidAt:d.paidAt||null,status:d.status==='paid'?'paid':'open',deletedAt:null}))};
+  state.debts.forEach(d=>d.personId=state.people[0].id);
+ }else state=sample();
 }
-function currentOpen(){ return state.debts.filter(d=>d.status==='open'); }
-function currentPaid(){ return state.debts.filter(d=>d.status==='paid'); }
-function totalOpen(){ return currentOpen().reduce((a,b)=>a+b.amount,0); }
-function nextId(){ return 'N-' + Math.random().toString(16).slice(2,12).toUpperCase(); }
-function render(){
-  const open = currentOpen().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-  const paid = currentPaid().sort((a,b)=>new Date(b.paidAt)-new Date(a.paidAt));
-  qs('avatarText').textContent = state.person.name.split(/\s+/).map(v=>v[0]).slice(-2).join('').toUpperCase();
-  qs('personName').textContent = state.person.name;
-  qs('personPhone').textContent = state.person.phone || 'Chưa có số điện thoại';
-  qs('totalDebt').textContent = fmt(totalOpen());
-  qs('summaryMeta').textContent = `1 người • ${open.length} mã chưa thu`;
-  qs('personTotal').textContent = fmt(totalOpen());
-  qs('debtCount').textContent = open.length;
-  qs('histCount').textContent = paid.length;
-  qs('tableMeta').textContent = `${open.length} khoản • Tổng: ${fmt(totalOpen())}`;
-  qs('historyTitle').textContent = `Lịch sử của ${state.person.name}`;
-  qs('historyName').textContent = state.person.name;
-  qs('debtRows').innerHTML = open.map(d=>`
-    <div class="row">
-      <div class="cell-id">${esc(d.id)}</div>
-      <div class="cell-money">${fmt(d.amount)}</div>
-      <div class="cell-note">${esc(d.note || '—')}</div>
-      <div class="cell-date" title="${fmtDate(d.createdAt)}"><span class="date-desktop">${fmtDate(d.createdAt)}</span><span class="date-mobile">${fmtDate(d.createdAt).slice(0,5)}</span></div>
-      <div class="actions">
-        <button class="act blue" data-edit="${esc(d.id)}" title="Sửa mã ${esc(d.id)}" aria-label="Sửa mã ${esc(d.id)}">${icons.edit}<span>Sửa</span></button>
-        <button class="act green" data-pay="${esc(d.id)}" title="Trả mã ${esc(d.id)}" aria-label="Trả mã ${esc(d.id)}">${icons.coin}<span>Trả</span></button>
-        <button class="act red" data-del="${esc(d.id)}" title="Xoá mã ${esc(d.id)}" aria-label="Xoá mã ${esc(d.id)}">${icons.trash}<span>Xoá</span></button>
-      </div>
-    </div>`).join('') || `<div class="row"><div style="grid-column:1/-1;color:#8090a8">Không có khoản nợ chưa thu.</div></div>`;
-  qs('historyRows').innerHTML = paid.map(d=>`
-    <div class="hist-row">
-      <div class="cell-id">${esc(d.id)}</div>
-      <div class="cell-money">${fmt(d.amount)}</div>
-      <div class="cell-note">${esc(d.note || '—')}</div>
-      <div class="cell-date" title="${fmtDate(d.paidAt)}"><span class="date-desktop">${fmtDate(d.paidAt)}</span><span class="date-mobile">${fmtDate(d.paidAt).slice(0,5)}</span></div>
-      <div class="actions">
-        <button class="act blue" data-undo="${esc(d.id)}" title="Hoàn tác mã ${esc(d.id)}" aria-label="Hoàn tác mã ${esc(d.id)}">${icons.undo}<span>Hoàn tác</span></button>
-        <button class="act red" data-delpaid="${esc(d.id)}" title="Xoá lịch sử mã ${esc(d.id)}" aria-label="Xoá lịch sử mã ${esc(d.id)}">${icons.trash}<span>Xoá</span></button>
-      </div>
-    </div>`).join('') || `<div class="hist-row"><div style="grid-column:1/-1;color:#8090a8">Chưa có khoản đã thu.</div></div>`;
-  save();
+state.version=4;
+let selected=state.people.find(p=>!p.deletedAt)?.id||null, view='home',editing=null, sheet=null, sheetContext=null;
+let cfg={};try{cfg=JSON.parse(localStorage.getItem(CFG_KEY)||'{}')}catch{}
+let fb=null, fbApp=null, fbAuth=null, fbDb=null, account=null, syncBusy=false, syncQueued=false, syncStatus='Chưa cấu hình', syncTimer=null, saveTimer=null, lastTick=Date.now();
+const now=()=>Math.max(Date.now(),++lastTick);
+function uid(prefix){const a=new Uint8Array(6);if(crypto?.getRandomValues)crypto.getRandomValues(a);else for(let i=0;i<a.length;i++)a[i]=Math.floor(Math.random()*256);return prefix+'-'+Array.from(a,v=>v.toString(16).padStart(2,'0')).join('').toUpperCase()}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){toast('Bộ nhớ điện thoại đầy. Hãy xuất bản sao lưu.');throw e}}
+function toast(s){const el=$('toast');el.textContent=s;el.classList.remove('hidden');clearTimeout(window.__sonoToast);window.__sonoToast=setTimeout(()=>el.classList.add('hidden'),2600)}
+const people=()=>state.people.filter(p=>!p.deletedAt), person=id=>state.people.find(p=>p.id===id&&!p.deletedAt), openDebts=id=>state.debts.filter(d=>d.personId===id&&!d.deletedAt&&d.status==='open'), paidDebts=id=>state.debts.filter(d=>d.personId===id&&!d.deletedAt&&d.status==='paid'), personTotal=id=>openDebts(id).reduce((s,d)=>s+d.amount,0), total=()=>people().reduce((s,p)=>s+personTotal(p.id),0), count=()=>people().reduce((s,p)=>s+openDebts(p.id).length,0);
+function changed(){persist();renderHeader();queueSync()}
+function parseAmounts(raw){const tokens=String(raw||'').trim().split(/[\s;]+/).filter(Boolean);if(!tokens.length||tokens.length>30)throw Error('Nhập từ 1 đến 30 số tiền');return tokens.map(t=>{let s=t.toLowerCase().replace(/₫|vnd/g,'').trim(),mult=1;if(/(triệu|tr|m)$/.test(s)){mult=1e6;s=s.replace(/(triệu|tr|m)$/,'')}else if(/(nghìn|ngàn|k)$/.test(s)){mult=1e3;s=s.replace(/(nghìn|ngàn|k)$/,'')}if(!/^\d+(?:[.,]\d+)*$/.test(s))throw Error('Số tiền không hợp lệ');s=s.replace(/\./g,'').replace(',','.');let n=Number(s);if(mult===1&&n<1000)mult=1000;n=Math.round(n*mult);if(!Number.isSafeInteger(n)||n<1||n>1e12)throw Error('Số tiền phải từ 1đ đến 1.000 tỷ đồng');return n})}
+function updateDemo(){if(state.demo){state.demo=false;toast('Đây là dữ liệu mẫu. Có thể xoá ở Cài đặt.')}}
+function renderHeader(){const n=people().length;$('totalDebt').textContent=money(total());$('summaryMeta').textContent=`${state.demo?'MẪU · ':''}${n} người • ${count()} mã chưa thu`;
+ const login=$('loginBtn');login.querySelector('.copy strong').textContent=account?(account.email||'Đã đăng nhập'):'Đăng nhập Google';
+ const chip=$('fbBtn'),strong=chip.querySelector('.copy strong'),small=chip.querySelector('.copy small');strong.textContent='Firebase';small.textContent=!cfg.apiKey||!cfg.projectId?'Chưa cấu hình':syncStatus;
+ chip.classList.toggle('warn',!account||syncStatus!=='Đã đồng bộ');chip.classList.toggle('ok',!!account&&syncStatus==='Đã đồng bộ');
 }
-function openHistory(){ qs('historyModal').classList.remove('hidden'); }
-function closeHistory(){ qs('historyModal').classList.add('hidden'); }
-function resetForm(){ editingId=null; qs('composerTitle').textContent='Thêm khoản nợ'; qs('saveDebtBtn').innerHTML = `${icons.plus}Thêm`; qs('amountInput').value=''; qs('noteInput').value=''; qs('amountInput').focus(); }
-function parseAmount(raw){ let s=raw.trim().toLowerCase().replace(/₫|vnd/g,''); if(!s) return 0; let mult=1; if(/(k|nghìn|ngàn)$/.test(s)){ mult=1000; s=s.replace(/(k|nghìn|ngàn)$/,''); } s=s.replace(/\./g,'').replace(/,/g,'.'); let n=Number(s); if(!isFinite(n)) return 0; if(mult===1 && n<1000) n*=1000; return Math.round(n*mult); }
-function saveDebt(){
-  const amount = parseAmount(qs('amountInput').value);
-  const note = qs('noteInput').value.trim();
-  if(!amount || amount<1){ toast('Nhập số tiền hợp lệ'); qs('amountInput').focus(); return; }
-  if(editingId){
-    const d=state.debts.find(x=>x.id===editingId); if(!d) return;
-    d.amount=amount; d.note=note; toast('Đã cập nhật khoản nợ');
-  }else{
-    state.debts.unshift({id:nextId(),amount,note,createdAt:new Date().toISOString(),status:'open'}); toast('Đã thêm khoản nợ');
-  }
-  render(); resetForm();
+function render(){renderHeader();if(view==='detail'&&person(selected))renderDetail();else{view='home';renderHome()}updateNav();}
+function updateNav(){document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.nav==='people'&&view==='home'))}
+function avatar(p){return esc(p.name.trim().split(/\s+/).map(v=>v[0]).slice(-2).join('').toUpperCase()||'?')}
+function homePerson(p){const debt=openDebts(p.id),latest=state.debts.filter(d=>d.personId===p.id&&!d.deletedAt).sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt))[0];return `<div class="home-person" data-person="${esc(p.id)}" role="button" tabindex="0" aria-label="Mở nợ của ${esc(p.name)}"><span class="home-avatar">${avatar(p)}</span><span class="home-person-info"><strong>${esc(p.name)}</strong><small>${debt.length} mã chưa thu${latest?' · '+esc(latest.note||'Giao dịch gần nhất'):''}</small></span><strong class="home-person-amount">${money(personTotal(p.id))}</strong><span class="home-chevron">${icons.chevron}</span><button class="act red home-delete" data-remove-person="${esc(p.id)}" aria-label="Xoá người nợ ${esc(p.name)}" title="Xoá người nợ">${icons.trash}</button></div>`}
+function renderHome(){const ps=people().slice().sort((a,b)=>personTotal(b.id)-personTotal(a.id));$('workspace').innerHTML=`<section class="section card home-card"><div class="section-head"><span>${icons.users}</span><h3>Danh sách người nợ (${ps.length})</h3><button class="top-add" data-new-person>${icons.plus} Người nợ</button></div><div class="home-list">${ps.length?ps.map(homePerson).join(''):'<div class="empty">Chưa có người nợ. Bấm + Người nợ để bắt đầu.</div>'}</div></section>`}
+function action(kind,d,label,cls,ico){return `<button class="act ${cls}" data-${kind}="${esc(d.id)}" title="${label} ${esc(d.id)}" aria-label="${label} ${esc(d.id)}">${ico}<span>${label}</span></button>`}
+function debtRow(d){return `<div class="row"><div class="cell-id" title="${esc(d.id)}">${esc(d.id)}</div><div class="cell-money">${money(d.amount)}</div><div class="cell-note" title="${esc(d.note||'')}">${esc(d.note||'—')}</div><div class="cell-date" title="${dateTime(d.createdAt)}"><span class="date-desktop">${dateTime(d.createdAt)}</span><span class="date-mobile">${shortDate(d.createdAt)}</span></div><div class="actions">${action('edit-debt',d,'Sửa','blue',icons.edit)}${action('pay-debt',d,'Trả','green',icons.coin)}${action('delete-debt',d,'Xoá','red',icons.trash)}</div></div>`}
+function renderDetail(){const p=person(selected);if(!p){view='home';renderHome();return}const ds=openDebts(p.id).slice().sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt));const paid=paidDebts(p.id).length;
+ $('workspace').innerHTML=`<section class="person-card card"><div class="person-top"><button class="avatar avatar-back" data-back title="Về danh sách người nợ" aria-label="Về danh sách người nợ">${avatar(p)}</button><div class="person-info"><h2>${esc(p.name)}</h2><div class="person-meta"><span>${icons.phone}</span><span>${esc(p.phone||'Chưa có số điện thoại')}</span><button class="iconbtn-inline" data-edit-person title="Sửa người nợ" aria-label="Sửa người nợ">${icons.edit}</button></div></div><div class="mini-balance"><strong>Tổng nợ chưa thu</strong><div class="amt">${money(personTotal(p.id))}</div></div></div><div class="segment"><button class="active" type="button">${icons.list}Khoản nợ (${ds.length})</button><button type="button" data-open-history>${icons.history}Lịch sử (${paid})</button></div></section>
+ <section class="section card"><div class="section-head"><span id="docIcon">${icons.doc}</span><h3>Danh sách mã nợ</h3><div class="right">${ds.length} khoản • Tổng: ${money(personTotal(p.id))}</div></div><div class="table-wrap"><div class="table-head"><div>Mã nợ</div><div>Số tiền</div><div>Ghi chú</div><div>Ngày</div><div>Thao tác</div></div><div class="table-body" id="debtRows">${ds.length?ds.map(debtRow).join(''):'<div class="empty">Chưa có mã nợ chưa thu.</div>'}</div></div></section>
+ <section class="composer card"><div class="composer-head"><div class="plusball">${icons.plus}</div><h4 id="composerTitle">${editing?'Sửa khoản nợ':'Thêm khoản nợ'}</h4><div class="hint">${icons.info}Enter 2 lần để lưu nhanh</div></div><form class="entry" id="debtForm"><div class="field">${icons.moneyInput}<input id="amountInput" placeholder="Số tiền (đ)" inputmode="decimal" autocomplete="off" required></div><div class="field">${icons.note}<input id="noteInput" placeholder="Ghi chú (ví dụ: Tiền ăn trưa)" maxlength="240" autocomplete="off"></div><button class="submit" id="saveDebtBtn" type="submit">${editing?icons.check:icons.plus}${editing?'Lưu':'Thêm'}</button></form></section>`;
+ if(editing){const d=state.debts.find(d=>d.id===editing);if(d){$('amountInput').value=String(d.amount);$('noteInput').value=d.note||''}}
 }
-function bind(){
-  qs('historyBtn').onclick=openHistory; qs('navHistoryBtn').onclick=openHistory; qs('closeHistoryBtn').onclick=closeHistory; qs('historyModal').onclick=(e)=>{ if(e.target===qs('historyModal')) closeHistory(); };
-  qs('saveDebtBtn').onclick=saveDebt;
-  qs('amountInput').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); qs('noteInput').focus(); } });
-  qs('noteInput').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); saveDebt(); } });
-  qs('debtRows').addEventListener('click', e=>{
-    const edit=e.target.closest('[data-edit]'); const pay=e.target.closest('[data-pay]'); const del=e.target.closest('[data-del]');
-    if(edit){ const d=state.debts.find(x=>x.id===edit.dataset.edit); if(!d) return; editingId=d.id; qs('composerTitle').textContent='Sửa khoản nợ'; qs('saveDebtBtn').innerHTML=`${icons.check}Lưu`; qs('amountInput').value=String(d.amount); qs('noteInput').value=d.note||''; qs('amountInput').focus(); return; }
-    if(pay){ const d=state.debts.find(x=>x.id===pay.dataset.pay); if(!d) return; d.status='paid'; d.paidAt=new Date().toISOString(); render(); toast('Đã chuyển vào lịch sử'); return; }
-    if(del){ if(!confirm('Xoá khoản nợ này?')) return; state.debts=state.debts.filter(x=>x.id!==del.dataset.del); render(); toast('Đã xoá khoản nợ'); }
-  });
-  qs('historyRows').addEventListener('click', e=>{
-    const undo=e.target.closest('[data-undo]'); const del=e.target.closest('[data-delpaid]');
-    if(undo){ const d=state.debts.find(x=>x.id===undo.dataset.undo); if(!d) return; d.status='open'; delete d.paidAt; render(); toast('Đã hoàn tác'); return; }
-    if(del){ if(!confirm('Xoá vĩnh viễn lịch sử khoản này?')) return; state.debts=state.debts.filter(x=>x.id!==del.dataset.delpaid); render(); toast('Đã xoá lịch sử'); }
-  });
-  qs('loginBtn').onclick=()=>toast('Demo giao diện'); qs('fbBtn').onclick=()=>toast('Firebase chưa cấu hình trong demo'); qs('editPersonBtn').onclick=()=>toast('Demo giao diện');
-}
-setIcons(); render(); bind();
+function resetComposer(){editing=null;renderDetail();$('amountInput')?.focus()}
+function saveDebt(){if(!selected||!person(selected))return;const vals=parseAmounts($('amountInput').value),note=$('noteInput').value.trim();if(editing){if(vals.length!==1)throw Error('Sửa mỗi lần một mã nợ');const d=state.debts.find(x=>x.id===editing&&!x.deletedAt&&x.status==='open'&&x.personId===selected);if(!d)throw Error('Mã nợ đã thay đổi');d.amount=vals[0];d.note=note;d.updatedAt=now();toast('Đã sửa mã nợ')}else{const t=Date.now();for(let i=0;i<vals.length;i++)state.debts.push({id:uid('N'),personId:selected,amount:vals[i],note,status:'open',createdAt:new Date(t+i).toISOString(),updatedAt:now(),paidAt:null,deletedAt:null});toast('Đã ghi '+vals.length+' mã nợ')}changed();resetComposer()}
+function stamp(d,changes){Object.assign(d,changes,{updatedAt:now()});changed();render()}
+function payDebt(id){const d=state.debts.find(d=>d.id===id&&!d.deletedAt&&d.personId===selected&&d.status==='open');if(!d)return;if(!confirm(`Xác nhận đã thu đủ ${money(d.amount)} của mã ${d.id}?`))return;stamp(d,{status:'paid',paidAt:new Date().toISOString()});toast('Đã chuyển vào lịch sử của '+person(selected).name)}
+function deleteDebt(id){const d=state.debts.find(d=>d.id===id&&!d.deletedAt&&d.personId===selected&&d.status==='open');if(!d)return;if(!confirm(`Xoá khoản nợ ${d.id} (${money(d.amount)})?`))return;stamp(d,{deletedAt:new Date().toISOString()});toast('Đã xoá mã nợ')}
+function deletePerson(id){const p=person(id);if(!p)return;if(!confirm(`Xoá người nợ ${p.name} và toàn bộ mã nợ, lịch sử của họ?`))return;const time=new Date().toISOString();p.deletedAt=time;p.updatedAt=now();state.debts.filter(d=>d.personId===id&&!d.deletedAt).forEach(d=>{d.deletedAt=time;d.updatedAt=now()});if(selected===id){selected=null;editing=null;view='home'}changed();render();toast('Đã xoá người nợ')}
+function showSheet(title,html,kind='other'){sheet=kind;const overlay=$('overlay');$('sheetTitle').textContent=title;$('sheetBody').innerHTML=html;overlay.classList.remove('hidden');$('closeSheet').innerHTML=icons.close}
+function closeSheet(){sheet=null;$('overlay').classList.add('hidden');if(view==='detail')$('amountInput')?.blur()}
+function openHistory(){const p=person(selected);if(!p){showSheet('Chọn người nợ',`<p class="notice">Lịch sử được lưu riêng cho từng người. Chọn một người dưới đây để xem.</p>${people().map(x=>`<button class="sheet-choice" data-history-person="${esc(x.id)}">${esc(x.name)} · ${paidDebts(x.id).length} khoản đã thu ${icons.chevron}</button>`).join('')||'<div class="empty">Chưa có người nợ.</div>'}`,'pick-history');return}const a=paidDebts(p.id).slice().sort((x,y)=>Date.parse(y.paidAt||y.createdAt)-Date.parse(x.paidAt||x.createdAt));showSheet('Lịch sử của '+p.name,`<div class="notice">Chỉ hiển thị khoản đã thu của <b>${esc(p.name)}</b>. Hoàn tác trả về danh sách nợ. Xoá lịch sử sẽ xoá mã đó.</div><div class="histbox"><div class="hist-head"><div>Mã nợ</div><div>Số tiền</div><div>Ghi chú</div><div>Ngày thu</div><div>Thao tác</div></div>${a.length?a.map(d=>`<div class="hist-row"><div class="cell-id">${esc(d.id)}</div><div class="cell-money">${money(d.amount)}</div><div class="cell-note">${esc(d.note||'—')}</div><div class="cell-date" title="${dateTime(d.paidAt||d.createdAt)}"><span class="date-desktop">${dateTime(d.paidAt||d.createdAt)}</span><span class="date-mobile">${shortDate(d.paidAt||d.createdAt)}</span></div><div class="actions">${action('undo-debt',d,'Hoàn tác','blue',icons.undo)}${action('delete-paid',d,'Xoá','red',icons.trash)}</div></div>`).join(''):'<div class="empty">Chưa có khoản đã trả.</div>'}</div>`,'history')}
+function doUndo(id){const d=state.debts.find(d=>d.id===id&&!d.deletedAt&&d.personId===selected&&d.status==='paid');if(!d)return;stamp(d,{status:'open',paidAt:null});openHistory();toast('Đã hoàn tác, mã trở lại danh sách chưa thu')}
+function deletePaid(id){const d=state.debts.find(d=>d.id===id&&!d.deletedAt&&d.personId===selected&&d.status==='paid');if(!d)return;if(!confirm(`Xoá vĩnh viễn mã đã trả ${d.id}?`))return;stamp(d,{deletedAt:new Date().toISOString()});openHistory();toast('Đã xoá lịch sử')}
+function openPersonForm(p=null){showSheet(p?'Sửa người nợ':'Thêm người nợ',`<form id="personForm" class="sheet-form"><label>Tên người nợ<input class="setting-input" id="personNameField" maxlength="80" value="${esc(p?.name||'')}" placeholder="Nhập tên" required autocomplete="off"></label><label>Số điện thoại (không bắt buộc)<input class="setting-input" id="personPhoneField" type="tel" maxlength="25" value="${esc(p?.phone||'')}" placeholder="Số điện thoại"></label><div class="sheet-actions"><button class="sheet-btn light" type="button" data-close>Huỷ</button><button class="sheet-btn primary" type="submit">${p?'Lưu thay đổi':'Thêm người nợ'}</button></div></form>`,p?'edit-person':'new-person');sheetContext=p?.id||null;$('personNameField').focus()}
+function submitPerson(){const name=$('personNameField').value.trim(),phone=$('personPhoneField').value.trim();if(!name)throw Error('Nhập tên người nợ');if(sheet==='edit-person'){const p=person(sheetContext);if(!p)throw Error('Người nợ không tồn tại');Object.assign(p,{name,phone,updatedAt:now()});toast('Đã cập nhật người nợ')}else{const p={id:uid('P'),name,phone,createdAt:new Date().toISOString(),updatedAt:now(),deletedAt:null};state.people.push(p);selected=p.id;view='detail';toast('Đã thêm người nợ')}changed();closeSheet();render()}
+function backup(){const data={format:'sono-backup',version:4,exportedAt:new Date().toISOString(),state};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='SoNo-Backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);toast('Đã tạo bản sao lưu JSON')}
+function openBackup(){showSheet('Sao lưu & khôi phục',`<div class="notice">Dữ liệu công nợ lưu trên điện thoại. Xuất JSON định kỳ để giữ bản dự phòng; khôi phục sẽ thay thế toàn bộ dữ liệu hiện tại sau khi xác nhận.</div><div class="sheet-actions"><button class="sheet-btn primary" data-export>${icons.upload} Xuất bản sao lưu</button><button class="sheet-btn light" data-import>Khôi phục từ JSON</button></div><p class="subtle">Đồng bộ đám mây chỉ bật sau khi mày thiết lập Firebase trong Cài đặt và đăng nhập Google thành công.</p>`,'backup')}
+function validateBackup(obj){const s=obj?.format==='sono-backup'?obj.state:obj;if(!s||!Array.isArray(s.people)||!Array.isArray(s.debts))throw Error('Không phải bản sao lưu Sổ Nợ');if(s.people.length>100000||s.debts.length>1000000)throw Error('Bản sao lưu quá lớn');const ids=new Set();for(const p of s.people){if(typeof p.id!=='string'||typeof p.name!=='string'||ids.has(p.id))throw Error('Dữ liệu người nợ không hợp lệ');ids.add(p.id)}const dids=new Set();for(const d of s.debts){if(typeof d.id!=='string'||dids.has(d.id)||!ids.has(d.personId)||!Number.isSafeInteger(d.amount)||d.amount<1||!['open','paid'].includes(d.status))throw Error('Dữ liệu mã nợ không hợp lệ');dids.add(d.id)}return {version:4,ownerUid:state.ownerUid,demo:false,people:s.people.map(p=>({...p,updatedAt:p.updatedAt||now(),deletedAt:p.deletedAt||null})),debts:s.debts.map(d=>({...d,updatedAt:d.updatedAt||now(),deletedAt:d.deletedAt||null}))}}
+async function restore(file){if(!file)return;const text=await file.text();if(text.length>60e6)throw Error('Tệp quá lớn');const next=validateBackup(JSON.parse(text));if(!confirm('Khôi phục sẽ THAY THẾ toàn bộ dữ liệu công nợ hiện tại. Mày đã sao lưu chưa?'))return;if(account)throw Error('Đăng xuất Firebase trước khi thay thế dữ liệu, tránh đồng bộ nhầm.');state=next;selected=people()[0]?.id||null;view='home';editing=null;persist();closeSheet();render();toast('Đã khôi phục dữ liệu')}
+function settings(){showSheet('Cài đặt & Firebase',`<div class="notice">Ứng dụng chạy offline. Để đăng nhập Google và đồng bộ giữa các máy, tạo Firebase Web App, bật Google Sign-In và Cloud Firestore, cấp quyền miền website đang mở, rồi điền cấu hình công khai bên dưới.</div><form id="firebaseForm" class="sheet-form"><label>Firebase API key<input class="setting-input" id="fbKey" value="${esc(cfg.apiKey||'')}" placeholder="AIza..."></label><label>Project ID<input class="setting-input" id="fbProject" value="${esc(cfg.projectId||'')}" placeholder="ten-du-an"></label><label>Auth domain<input class="setting-input" id="fbDomain" value="${esc(cfg.authDomain||'')}" placeholder="ten-du-an.firebaseapp.com"></label><label>App ID<input class="setting-input" id="fbApp" value="${esc(cfg.appId||'')}" placeholder="1:...:web:..."></label><div class="sheet-actions"><button class="sheet-btn primary" type="submit">Lưu cấu hình</button><button class="sheet-btn light" type="button" data-connect>Đăng nhập Google</button></div></form><div class="notice" id="syncDetails">${esc(account?'Đã đăng nhập: '+(account.email||account.uid):'Chưa đăng nhập Google.')} ${esc(syncStatus)}.</div><div class="sheet-actions"><button class="sheet-btn light" data-sync>Đồng bộ ngay</button><button class="sheet-btn light" data-logout>Đăng xuất</button></div><button class="sheet-btn light" data-copy-rules>Chép Firestore Security Rules</button><button class="sheet-btn light" data-clear-sample>${state.demo?'Xoá dữ liệu mẫu và bắt đầu sổ trống':'Xoá toàn bộ dữ liệu trên máy'}</button><p class="subtle">Đăng nhập Google cần mở trang qua HTTPS trên miền đã được thêm vào Firebase Authentication → Settings → Authorized domains; file HTML mở từ bộ nhớ máy không hỗ trợ đăng nhập Google.</p>`,'settings')}
+const RULES=`rules_version = '2';\nservice cloud.firestore {\n match /databases/{database}/documents {\n  match /sono_users/{userId}/{kind}/{itemId} {\n   allow read, write: if request.auth != null && request.auth.uid == userId && kind in ['people', 'debts'];\n  }\n }\n}`;
+function queueSync(){if(!account||!fbDb||state.demo)return;syncStatus=navigator.onLine?'Đang chờ đồng bộ':'Offline · chờ kết nối';renderHeader();clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow().catch(e=>{syncStatus='Lỗi: '+(e.code||e.message);renderHeader()}),900)}
+async function initFirebase(){if(fb)return;if(!cfg.apiKey||!cfg.projectId||!cfg.authDomain||!cfg.appId)throw Error('Nhập đủ cấu hình Firebase trong Cài đặt');if(location.protocol!=='https:'&&location.hostname!=='localhost')throw Error('Đăng nhập Google cần mở trang trên HTTPS, không dùng file:// hoặc trang raw');const [app,auth,firestore]=await Promise.all([import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js'),import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js')]);fb={app,auth,firestore};fbApp=app.initializeApp(cfg);fbAuth=auth.getAuth(fbApp);fbDb=firestore.getFirestore(fbApp);await auth.setPersistence(fbAuth,auth.browserLocalPersistence);auth.onAuthStateChanged(fbAuth,u=>{if(!u){account=null;syncStatus='Chưa đăng nhập';renderHeader();return}if(state.ownerUid&&state.ownerUid!==u.uid){account=null;syncStatus='Tài khoản không khớp';toast('Dữ liệu gắn với Google khác. Hãy sao lưu trước khi đổi tài khoản.');auth.signOut(fbAuth);return}state.ownerUid=u.uid;persist();account=u;syncStatus='Đang kết nối';renderHeader();syncNow().catch(e=>{syncStatus='Lỗi: '+(e.code||e.message);renderHeader();toast('Không đồng bộ được: '+e.message)})})}
+async function googleLogin(){if(!cfg.apiKey||!cfg.projectId||!cfg.authDomain||!cfg.appId){settings();toast('Điền đủ cấu hình Firebase trước');return}try{await initFirebase();if(account){settings();return}const provider=new fb.auth.GoogleAuthProvider();await fb.auth.signInWithPopup(fbAuth,provider)}catch(e){toast('Đăng nhập Google: '+(e.code||e.message))}}
+async function syncNow(){if(!account||!fbDb)throw Error('Chưa đăng nhập Firebase');if(state.demo)throw Error('Xoá dữ liệu mẫu trước khi đồng bộ thật');if(!navigator.onLine){syncStatus='Offline · chờ kết nối';renderHeader();return}if(syncBusy){syncQueued=true;return}syncBusy=true;syncStatus='Đang đồng bộ';renderHeader();try{const fs=fb.firestore;const root=['sono_users',account.uid];for(const [kind,items] of [['people',state.people],['debts',state.debts]]){
+ const col=fs.collection(fbDb,...root,kind);const remote=await fs.getDocs(col);const map=new Map(items.map(o=>[o.id,o]));const push=[];remote.forEach(doc=>{const r=doc.data();if(!r||typeof r.id!=='string')return;const local=map.get(r.id);if(!local){if(kind==='people')state.people.push(r);else state.debts.push(r);map.set(r.id,r)}else if((Number(r.updatedAt)||0)>(Number(local.updatedAt)||0)){Object.assign(local,r)}else if((Number(local.updatedAt)||0)>(Number(r.updatedAt)||0)){push.push(local)}});for(const local of items){if(!remote.docs.some(d=>d.id===local.id))push.push(local)}for(let i=0;i<push.length;i+=100){const batch=fs.writeBatch(fbDb);push.slice(i,i+100).forEach(r=>batch.set(fs.doc(fbDb,...root,kind,r.id),r));await batch.commit()}}
+ persist();render();syncStatus='Đã đồng bộ';renderHeader();}finally{syncBusy=false;if(syncQueued){syncQueued=false;queueSync()}}}
+function clearAll(){if(!confirm('Xoá dữ liệu mẫu/toàn bộ dữ liệu trên máy? Không thể hoàn tác nếu chưa sao lưu.'))return;if(account){toast('Đăng xuất Firebase trước khi xoá dữ liệu trên máy');return}state={version:4,ownerUid:null,demo:false,people:[],debts:[]};selected=null;editing=null;view='home';persist();closeSheet();render();toast('Sổ nợ đã trống')}
+function clickAction(el){if(el.closest('[data-close]'))return closeSheet();if(el.closest('[data-back]')){view='home';editing=null;return render()}if(el.closest('[data-new-person]'))return openPersonForm();if(el.closest('[data-edit-person]'))return openPersonForm(person(selected));const id=el.closest('[data-remove-person]')?.dataset.removePerson;if(id)return deletePerson(id);const node=el.closest('[data-person]');if(node){selected=node.dataset.person;view='detail';editing=null;return render()}if(el.closest('[data-open-history]'))return openHistory();const hp=el.closest('[data-history-person]');if(hp){selected=hp.dataset.historyPerson;view='detail';render();return openHistory()}const edit=el.closest('[data-edit-debt]');if(edit){const d=state.debts.find(d=>d.id===edit.dataset.editDebt&&!d.deletedAt&&d.status==='open');if(d){editing=d.id;renderDetail();$('amountInput').focus()}return}const pay=el.closest('[data-pay-debt]');if(pay)return payDebt(pay.dataset.payDebt);const del=el.closest('[data-delete-debt]');if(del)return deleteDebt(del.dataset.deleteDebt);const undo=el.closest('[data-undo-debt]');if(undo)return doUndo(undo.dataset.undoDebt);const delPaid=el.closest('[data-delete-paid]');if(delPaid)return deletePaid(delPaid.dataset.deletePaid);
+ if(el.closest('[data-export]'))return backup();if(el.closest('[data-import]'))return $('fileImport').click();if(el.closest('[data-connect]'))return googleLogin();if(el.closest('[data-sync]'))return syncNow().then(()=>toast('Đã đồng bộ')).catch(e=>toast(e.message));if(el.closest('[data-logout]'))return fbAuth?fb.auth.signOut(fbAuth).then(()=>toast('Đã đăng xuất')):toast('Chưa đăng nhập');if(el.closest('[data-copy-rules]'))return navigator.clipboard?.writeText(RULES).then(()=>toast('Đã chép quy tắc bảo mật')).catch(()=>toast('Trình duyệt không cho phép sao chép'));if(el.closest('[data-clear-sample]'))return clearAll();}
+function bind(){document.addEventListener('click',e=>{const b=e.target.closest('button,[data-person]');if(!b)return;if(b.id==='closeSheet')return closeSheet();if(b.id==='loginBtn')return googleLogin();if(b.id==='fbBtn'||b.dataset.nav==='settings')return settings();if(b.dataset.nav==='people'){view='home';editing=null;return render()}if(b.dataset.nav==='history')return openHistory();if(b.dataset.nav==='backup')return openBackup();Promise.resolve().then(()=>clickAction(b)).catch(e=>toast(e.message))});document.addEventListener('submit',e=>{if(e.target.id==='debtForm'){e.preventDefault();try{saveDebt()}catch(x){toast(x.message);$('amountInput').focus()}}else if(e.target.id==='personForm'){e.preventDefault();try{submitPerson()}catch(x){toast(x.message)}}else if(e.target.id==='firebaseForm'){e.preventDefault();cfg={apiKey:$('fbKey').value.trim(),projectId:$('fbProject').value.trim(),authDomain:$('fbDomain').value.trim(),appId:$('fbApp').value.trim()};localStorage.setItem(CFG_KEY,JSON.stringify(cfg));syncStatus='Chưa đăng nhập';renderHeader();toast('Đã lưu cấu hình. Bấm Đăng nhập Google để kết nối.')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sheet)return closeSheet();if(e.key==='Enter'&&e.target.id==='amountInput'){e.preventDefault();$('noteInput').focus()}else if(e.key==='Enter'&&e.target.id==='noteInput'){e.preventDefault();try{saveDebt()}catch(x){toast(x.message);$('amountInput').focus()}}else if((e.key==='Enter'||e.key===' ')&&e.target.classList?.contains('home-person')){e.preventDefault();selected=e.target.dataset.person;view='detail';render()}});$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))closeSheet()});$('fileImport').addEventListener('change',async e=>{try{await restore(e.target.files[0])}catch(x){toast('Khôi phục: '+x.message)}finally{e.target.value=''}});window.addEventListener('online',()=>{if(account)queueSync()});window.addEventListener('beforeunload',persist);}
+$('googleIcon').innerHTML=icons.google;$('cloudIcon').innerHTML=icons.cloud;$('bagIcon').innerHTML=icons.bag;$('chevIcon').innerHTML=icons.chevron;for(const [id,ico] of [['navPeopleIcon',icons.users],['navHistoryIcon',icons.history],['navBackupIcon',icons.upload],['navSettingsIcon',icons.settings]])$(id).innerHTML=ico;
+bind();render();persist();if(cfg.apiKey&&cfg.projectId&&cfg.authDomain&&cfg.appId&&location.protocol==='https:')initFirebase().catch(e=>{syncStatus='Lỗi kết nối';renderHeader()});
+})();
+
 </script>
 </body>
 </html>
