@@ -145,18 +145,6 @@ class MainActivity : ComponentActivity() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (currentUser() != null) requestLocalStateAndSync(silent = true)
-    }
-
-    override fun onPause() {
-        if (::webView.isInitialized && currentUser() != null) {
-            requestLocalStateAndSync(silent = true)
-        }
-        super.onPause()
-    }
-
     override fun onDestroy() {
         fileCallback?.onReceiveValue(null)
         fileCallback = null
@@ -356,8 +344,16 @@ class MainActivity : ComponentActivity() {
             FirebaseAuth.getInstance()
                 .signInWithCredential(firebaseCredential)
                 .addOnSuccessListener { auth ->
-                    webToast("Đã đăng nhập ${auth.user?.email ?: "Google"}")
-                    requestLocalStateAndSync(silent = false)
+                    val signedUser = auth.user
+                    val prefs = getSharedPreferences("sono-account-lock", MODE_PRIVATE)
+                    val boundUid = prefs.getString("uid", null)
+                    if (boundUid != null && signedUser?.uid != boundUid) {
+                        FirebaseAuth.getInstance().signOut()
+                        webToast("Máy này đang giữ sổ của tài khoản Google khác. Không cho đổi tài khoản để tránh lộ hoặc trộn dữ liệu. Hãy sao lưu trước khi chuyển máy.")
+                    } else if (signedUser != null) {
+                        if (boundUid == null) prefs.edit().putString("uid", signedUser.uid).apply()
+                        webToast("Đã đăng nhập ${signedUser.email ?: "Google"}. Chỉ bấm Đồng bộ sau khi kiểm tra đúng sổ của mình.")
+                    }
                 }
                 .addOnFailureListener { e -> webToast("Đăng nhập Firebase lỗi: ${e.message}") }
         } catch (e: Exception) {
@@ -393,6 +389,15 @@ class MainActivity : ComponentActivity() {
             return
         }
 
+        val owner = root.optString("ownerUid").takeIf { it.isNotBlank() && it != "null" }
+        if (owner != null && owner != uid) {
+            webToast("Sổ trên máy thuộc tài khoản khác. Không đồng bộ để tránh lộ dữ liệu.")
+            return
+        }
+        if (root.optBoolean("demo", false)) {
+            webToast("Đây là dữ liệu mẫu. Hãy xóa dữ liệu mẫu trước khi đồng bộ Firebase.")
+            return
+        }
         val people = root.optJSONArray("people") ?: JSONArray()
         val debts = root.optJSONArray("debts") ?: JSONArray()
         val operations = mutableListOf<(WriteBatch) -> Unit>()
