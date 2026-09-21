@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 // Cho phep mo/sync project truoc khi co google-services.json.
@@ -37,9 +36,6 @@ android {
     }
 }
 
-kotlin {
-    jvmToolchain(17)
-}
 
 dependencies {
     implementation("androidx.core:core-ktx:1.17.0")
