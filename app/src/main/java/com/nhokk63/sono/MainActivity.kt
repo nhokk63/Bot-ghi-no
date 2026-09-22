@@ -276,15 +276,8 @@ class MainActivity : ComponentActivity() {
             runOnUiThread { lifecycleScope.launch { signInGoogleInternal() } }
         }
 
-        @JavascriptInterface
-        fun syncNow() {
-            runOnUiThread { requestLocalStateAndSync(silent = false) }
-        }
-
-        @JavascriptInterface
-        fun restoreCloud() {
-            runOnUiThread { restoreFromCloud() }
-        }
+        // Legacy whole-ledger upload/restore bridge deliberately disabled.
+        // Never expose a destructive sync operation from JavaScript.
     }
 
     private fun showFirebaseMenu() {
@@ -320,15 +313,16 @@ class MainActivity : ComponentActivity() {
             .setTitle("Firebase · ${user.email ?: user.uid}")
             .setItems(
                 arrayOf(
-                    "Đồng bộ công nợ lên Firestore",
-                    "Khôi phục công nợ từ Firestore",
+                    "Tình trạng đồng bộ",
                     "Đăng xuất Google"
                 )
             ) { _, which ->
                 when (which) {
-                    0 -> requestLocalStateAndSync(silent = false)
-                    1 -> confirmRestoreFromCloud()
-                    2 -> {
+                    0 -> AlertDialog.Builder(this)
+                        .setTitle("Đã khóa chức năng đồng bộ cũ")
+                        .setMessage("Bản đồng bộ kiểu đẩy toàn bộ sổ lên/kéo về có nguy cơ ghi đè tiền khi dùng hai máy. Hiện chỉ dùng sổ cục bộ và sao lưu JSON kèm ảnh; không đồng bộ hai máy bằng phiên bản này.")
+                        .setPositiveButton("Đã hiểu", null).show()
+                    1 -> {
                         FirebaseAuth.getInstance().signOut()
                         webToast("Đã đăng xuất Google")
                     }
