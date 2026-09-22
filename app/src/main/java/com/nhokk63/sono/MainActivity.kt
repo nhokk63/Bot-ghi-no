@@ -277,7 +277,7 @@ class MainActivity : ComponentActivity() {
 
         AlertDialog.Builder(this)
             .setTitle(title)
-            .setMessage("Ảnh bằng chứng KHÔNG tải lên Firebase. Ảnh vẫn nằm trên máy và trong JSON sao lưu có ảnh.")
+            // Khong dung setMessage voi setItems: setMessage che mat danh sach nut dang nhap.
             .setItems(items) { dialog, which ->
                 if (user == null) {
                     if (which == 0) lifecycleScope.launch { signInGoogleInternal() }
