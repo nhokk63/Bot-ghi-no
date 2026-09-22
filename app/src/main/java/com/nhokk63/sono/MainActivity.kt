@@ -3,10 +3,13 @@ package com.nhokk63.sono
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.graphics.Color
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.webkit.JavascriptInterface
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
@@ -18,6 +21,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -65,6 +72,10 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Android 15+ draws behind status/navigation bars. Reserve their insets in the root view.
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.statusBarColor = Color.TRANSPARENT
+        window.navigationBarColor = Color.TRANSPARENT
         credentialManager = CredentialManager.create(this)
 
         val assetLoader = WebViewAssetLoader.Builder()
@@ -120,7 +131,34 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        setContentView(webView)
+        // Keep the entire WebView BETWEEN status bar, display cutout and navigation bar.
+        // Clear only already-handled insets before dispatching to WebView, so its IME
+        // viewport handling still receives keyboard changes (no ghost/double padding).
+        val root = FrameLayout(this).apply {
+            setBackgroundColor(Color.rgb(246, 248, 253))
+            addView(
+                webView,
+                FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
+        }
+        val handledInsets = WindowInsetsCompat.Type.systemBars() or
+            WindowInsetsCompat.Type.displayCutout()
+        ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
+            val bars = insets.getInsets(handledInsets)
+            view.setPadding(bars.left, bars.top, bars.right, bars.bottom)
+            WindowInsetsCompat.Builder(insets)
+                .setInsets(handledInsets, Insets.NONE)
+                .build()
+        }
+        WindowCompat.getInsetsController(window, root).apply {
+            isAppearanceLightStatusBars = true
+            isAppearanceLightNavigationBars = true
+        }
+        setContentView(root)
+        ViewCompat.requestApplyInsets(root)
         webView.loadUrl("https://appassets.androidplatform.net/assets/index.html")
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -254,46 +292,49 @@ class MainActivity : ComponentActivity() {
             AlertDialog.Builder(this)
                 .setTitle("Firebase chưa cấu hình")
                 .setMessage(
-                    "Copy google-services.json vào thư mục app/, Sync Gradle, sau đó build lại ứng dụng. " +
-                        "Thông tin Firebase sẽ được gắn cố định lúc build, không phải nhập trong app."
+                    "Kiểm tra app/google-services.json, Sync Gradle và build lại ứng dụng."
                 )
-                .setPositiveButton("Đã hiểu", null)
+                .setPositiveButton("Đóng", null)
                 .show()
             return
         }
 
         val user = currentUser()
-        val title = if (user == null) "Firebase & tài khoản" else "Firebase · ${user.email ?: user.uid}"
-        val items = if (user == null) {
-            arrayOf("Đăng nhập Google", "Đóng")
-        } else {
-            arrayOf(
-                "Đồng bộ dữ liệu lên Firestore",
-                "Khôi phục dữ liệu từ Firestore",
-                "Đăng xuất Google",
-                "Đóng"
-            )
+        if (user == null) {
+            // An explicit action button avoids the old setMessage/setItems visibility bug.
+            // Both Settings > Account and Settings > Firebase open this same dialog.
+            AlertDialog.Builder(this)
+                .setTitle("Firebase & tài khoản")
+                .setMessage(
+                    "Chưa đăng nhập. Ảnh bằng chứng chỉ lưu trên máy và trong JSON sao lưu có ảnh."
+                )
+                .setPositiveButton("Đăng nhập Google") { _, _ ->
+                    lifecycleScope.launch { signInGoogleInternal() }
+                }
+                .setNegativeButton("Đóng", null)
+                .show()
+            return
         }
 
         AlertDialog.Builder(this)
-            .setTitle(title)
-            // Khong dung setMessage voi setItems: setMessage che mat danh sach nut dang nhap.
-            .setItems(items) { dialog, which ->
-                if (user == null) {
-                    if (which == 0) lifecycleScope.launch { signInGoogleInternal() }
-                    else dialog.dismiss()
-                } else {
-                    when (which) {
-                        0 -> requestLocalStateAndSync(silent = false)
-                        1 -> confirmRestoreFromCloud()
-                        2 -> {
-                            FirebaseAuth.getInstance().signOut()
-                            webToast("Đã đăng xuất Google")
-                        }
-                        else -> dialog.dismiss()
+            .setTitle("Firebase · ${user.email ?: user.uid}")
+            .setItems(
+                arrayOf(
+                    "Đồng bộ công nợ lên Firestore",
+                    "Khôi phục công nợ từ Firestore",
+                    "Đăng xuất Google"
+                )
+            ) { _, which ->
+                when (which) {
+                    0 -> requestLocalStateAndSync(silent = false)
+                    1 -> confirmRestoreFromCloud()
+                    2 -> {
+                        FirebaseAuth.getInstance().signOut()
+                        webToast("Đã đăng xuất Google")
                     }
                 }
             }
+            .setNegativeButton("Đóng", null)
             .show()
     }
 
