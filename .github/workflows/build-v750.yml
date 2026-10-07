@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - chatgpt-build-v750-20261007
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
