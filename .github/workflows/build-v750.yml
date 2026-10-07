@@ -1,0 +1,62 @@
+name: Build Sổ Nợ v7.5.0 unsigned
+
+on:
+  push:
+    branches:
+      - chatgpt-build-v750-20261007
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout build branch
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android 36
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Reconstruct v7.5.0 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat build_text/chunk_00 build_text/chunk_01 build_text/chunk_02 build_text/chunk_03 build_text/chunk_04 build_text/chunk_05 build_text/chunk_06 build_text/chunk_07 > source.b64
+          base64 -d source.b64 > source.zip
+          echo "f78871cee4e8431348cb9a7f861f88ceb76e4fde7591ab9cef162935607c2c78  source.zip" | sha256sum -c -
+          mkdir project
+          unzip -q source.zip -d project
+
+      - name: Build unsigned release APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd project
+          sed -i '/signingConfig signingConfigs.release/d' app/build.gradle
+          gradle clean assembleRelease --console=plain
+          find app/build/outputs/apk/release -maxdepth 1 -type f -name '*.apk' -print
+
+      - name: Upload unsigned APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoNoTapHoa-7.5.0-unsigned
+          path: project/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+          retention-days: 1
