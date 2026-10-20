@@ -1,0 +1,27 @@
+name: Publish payment OTA 7.6.0.1
+on:
+  push:
+    paths: ['distribution/ota-7.6.0.1/publish.json']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore and verify release assets
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,base64,hashlib,zipfile,io
+          root=pathlib.Path('distribution/ota-7.6.0.1')
+          for asset in json.loads((root/'publish.json').read_text())['assets']:
+              data=base64.b64decode(''.join((root/p).read_text() for p in asset['parts']),validate=True)
+              assert hashlib.sha256(data).hexdigest()==asset['sha256']
+              with zipfile.ZipFile(io.BytesIO(data)) as z: assert z.testzip() is None
+              pathlib.Path(asset['name']).write_bytes(data)
+          PY
+      - name: Publish signed OTA and tested source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create ota-7.6.0.1 sono-ota-7.6.0.1.zip SoNo-Payment-7.6.0.1-source-tests.zip --title "Sổ Nợ OTA 7.6.0.1 – Trả theo số tiền" --notes "Thêm nhập tiền trả, chọn khoản/tự chọn cũ trước, giữ phần dư, lịch sử và hoàn tác lượt thu. Qua 10 nhóm kiểm tra tính tiền (1000 ca sinh tự động), 5 ca bộ gộp native và kiểm tra giao diện/offline/ghi đầy bộ nhớ/kết quả sync cũ. Dữ liệu thử; chưa kiểm thử hai điện thoại thật. Yêu cầu APK 7.5.2 trở lên."
