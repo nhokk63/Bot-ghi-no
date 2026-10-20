@@ -1,0 +1,18 @@
+{
+  "assets": [
+    {
+      "name": "sono-ota-7.6.0.1.zip",
+      "sha256": "4cb8965bd6b691e931aacf61b6fda5cc4f94eff089303b8e48cfeb7b2161c85f",
+      "parts": [
+        "payload.b64"
+      ]
+    },
+    {
+      "name": "SoNo-Payment-7.6.0.1-source-tests.zip",
+      "sha256": "9777eee6872c9dc9358c266e3cac0f30ae26a2fcad05f7239b119d490cc48a58",
+      "parts": [
+        "source.b64"
+      ]
+    }
+  ]
+}
