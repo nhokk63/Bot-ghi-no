@@ -1,0 +1,28 @@
+name: Publish signed Sổ Nợ release
+on:
+  push:
+    paths:
+      - 'distribution/v7.5.1/publish.json'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore and verify signed assets
+        run: |
+          python3 - <<'PY'
+          import pathlib, json, base64, hashlib
+          root=pathlib.Path('distribution/v7.5.1')
+          spec=json.loads((root/'publish.json').read_text())
+          for asset in spec['assets']:
+              data=base64.b64decode(''.join((root/p).read_text() for p in asset['parts']),validate=True)
+              assert hashlib.sha256(data).hexdigest()==asset['sha256']
+              pathlib.Path(asset['name']).write_bytes(data)
+          PY
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v7.5.1 SoNoTapHoa-7.5.1-release.apk sono-ota-7.5.1.1.zip --title "Sổ Nợ Tạp Hoá 7.5.1" --notes "Sửa nguồn cập nhật APK/OTA. APK ký bằng khóa release cũ. OTA có SHA-256 và chữ ký RSA."
