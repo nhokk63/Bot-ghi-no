@@ -1,0 +1,26 @@
+name: Publish Sổ Nợ 7.5.2 update fix
+on:
+  push:
+    paths: ['distribution/v7.5.2/publish.json']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify release assets
+        run: |
+          python3 - <<'PY'
+          import pathlib, json, base64, hashlib
+          root=pathlib.Path('distribution/v7.5.2')
+          for asset in json.loads((root/'publish.json').read_text())['assets']:
+              data=base64.b64decode(''.join((root/p).read_text() for p in asset['parts']),validate=True)
+              assert hashlib.sha256(data).hexdigest()==asset['sha256']
+              pathlib.Path(asset['name']).write_bytes(data)
+          PY
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v7.5.2 SoNoTapHoa-7.5.2-release.apk sono-ota-7.5.2.1.zip --title "Sổ Nợ Tạp Hoá 7.5.2" --notes "Sửa reset heartbeat OTA gây rollback nhầm; chặn cập nhật đồng thời; xử lý renderer WebView dừng và lỗi đọc tài nguyên. Cần cài APK để sửa native. Chưa kiểm thử trên điện thoại thật."
