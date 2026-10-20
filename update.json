@@ -9,12 +9,12 @@
     "mandatory": false
   },
   "ota": {
-    "versionCode": 7500202,
-    "versionName": "7.5.2.2",
+    "versionCode": 7600001,
+    "versionName": "7.6.0.1",
     "minNativeVersionCode": 75002,
-    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/ota-7.5.2.2/sono-ota-7.5.2.2.zip",
-    "sha256": "b4bb47e8083e3f6784a531b6468ba02eacd5090c469d64b4f56bed5d550a1a18",
-    "signature": "lnemyOTBUnYr/2vfqRhk9/5l5w6q8S62F02X4c21ODgMySLTuWGby2JJQf9cYfc8yxsYwrd8MmH3Pla8nrH9Kf1kKWWVMiYoXCTxntlcxrcgq6zuCekjuSRsCE4jYrhSIArrgA3RKHHvvrN3oWGttyR+ftoTvBdvuRiMgNhIyr3Z3SYLUM4m8jMVfPX4i6w/T1arxHO/59ocVcc11vFVqIpZYJ73gjBOfp5MsDmVMbBYpUXJfhD/9cOGebihPLREasgXPeHbK6HzBxz3qmSC2gRc2QBuiH/i5AY0vncpkCnLNwMkX22+Ev0TIjSCyv2TlV/bmT8SFiFh/RFdOmNNkKSWpVXZMeSjiTYZUae+kndlC823quAbEd157pIftEB9esMZCDLj5dHi8Pn3bGUefMk04UZvOtqV0Do+dQUhlSKI8LBRB8bc41vCDfTdzKmf0P5ko0ZtQ3XEFufZZiq2UkncB4PeiH/oFMKs3Xhgxq97zPqO/0l2nnxD4Xrg3PRo",
-    "notes": "Bản thử OTA: thêm nhãn xanh “OTA thử 7.5.2.2 đã chạy” trong Cài đặt. Không thay đổi JavaScript hoặc dữ liệu."
+    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/ota-7.6.0.1/sono-ota-7.6.0.1.zip",
+    "sha256": "4cb8965bd6b691e931aacf61b6fda5cc4f94eff089303b8e48cfeb7b2161c85f",
+    "signature": "UFSJEGBMacwP5OsbHarZJ3UKfL+mjVih9vdbUTLs2vtrywN8Wu0ERlFWiolNoZeIw6XyHpAzuJCMb/0TQWoYgIq1yjkhl3YlyvHODI02+aAPzQ8eGdV0eI99OVacPi1HCTBF8W/HX7v0MX1Dla3dO4BnIQ3wRhmfN7PVQiSeBrVnDdm5rdpZ3NABCSPUTaRvxmnRb9erRO+KdFadxJm0nS3YGUUMeXsgtPj7n4Fg7n3zCajrbkaNfYdFZPRSi/HhPmjacWsWGEDfDlSdR9gKgwSGYCPYgzPXQJz7fyfJILpJVOFpbZOjQa/7MZFP535/54zJVkXC7p0IJrtN5j6kP8YYCJu/rh1A4/TDmag31kHpdObpna7l57nG3x9h5iNkftTtz+CMLoPrvBMuhYqHr2WDBM29WJuFdltJkvj8yHklqPKHGMdFXtx3diLOfBb91hT9j7AKFOYvmz7dVVx2F5gB0eXz7T5OO+7OVbALXk40IXL/+oOQXkbRLbV9E1P7",
+    "notes": "Thêm trả nợ theo số tiền: chọn khoản hoặc tự chọn cũ trước, giữ phần dư, lịch sử và hoàn tác cả lượt thu. Đã kiểm tra tính tiền, lưu offline và xung đột đồng bộ bằng dữ liệu thử."
   }
 }
