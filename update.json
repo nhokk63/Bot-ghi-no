@@ -1,11 +1,20 @@
 {
   "schema": 1,
   "native": {
-    "versionCode": 75001,
-    "versionName": "7.5.1",
-    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/v7.5.1/SoNoTapHoa-7.5.1-release.apk",
-    "sha256": "138468c4424533a6ab987147b9e54483a847b3283d75e7883a8fbd757f2d171b",
-    "notes": "Sửa nguồn cập nhật APK và OTA.",
+    "versionCode": 75002,
+    "versionName": "7.5.2",
+    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/v7.5.2/SoNoTapHoa-7.5.2-release.apk",
+    "sha256": "8662396d03f1f3e1ccf448a396472d3230abdd8cdb4ee8c453278c5aa6b63f5f",
+    "notes": "Sửa kiểm tra heartbeat OTA, chặn cập nhật đồng thời và phục hồi khi WebView dừng.",
     "mandatory": false
+  },
+  "ota": {
+    "versionCode": 7500201,
+    "versionName": "7.5.2.1",
+    "minNativeVersionCode": 75002,
+    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/v7.5.2/sono-ota-7.5.2.1.zip",
+    "sha256": "7d397da67f2f5e8ae3de6a72585b296cbd0a0d6850a639f1b985d427a123cd57",
+    "signature": "wdeowhIzKnjVF8+LojLY74OJIEPa4Xo6v4IrvTM4IylXCjqUZubCQR5zwIOuhq+mWfXJMgDVH6x6PrUnCLex+aPby1FbHe+RbIyPNTjOKSeeFHlVxKVQMXGLz2WJ1zkFsn5kLXm2RGO1FKe63CgzHqGYCgKkcsx4R/wfggLmURcNyCfR8dkEvTvDkdRr6FESWtKJpERH26HBB5P7nX/SkUcpdMlCqKA/Lrm+DXkW9nt6RKSqy60DzPCq38I7Hl9E/dDsIMlvxaHjrtfqN7w43JJ27kwznE2GBpP4+obonrXNswHcBKkniPCerJkjmdRVQ+n3GdP60NmKaCefIvWNEqO4B7Ke3ZmY3/ELueBUHoxxHSGimhnjNQLNgL08yVJCTcMN83aAopXkMAmh6p6rUZHrsoWK382Jnokh9lRz/5RqP9/HLMQxC2xKiOHmSKhTDKAirjNoDRYPIRdC7xp7ajUEsKoPaAFU1qp+RWjBkQbS6T2xegPc40dLjVGBnetF",
+    "notes": "OTA dành cho APK 7.5.2 đã sửa kiểm tra khởi động."
   }
 }
