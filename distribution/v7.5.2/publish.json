@@ -1,0 +1,32 @@
+{
+  "assets": [
+    {
+      "name": "SoNoTapHoa-7.5.2-release.apk",
+      "sha256": "8662396d03f1f3e1ccf448a396472d3230abdd8cdb4ee8c453278c5aa6b63f5f",
+      "parts": [
+        "apk-00.b64",
+        "apk-01.b64",
+        "apk-02.b64",
+        "apk-03.b64",
+        "apk-04.b64",
+        "apk-05.b64",
+        "apk-06.b64",
+        "apk-07.b64"
+      ]
+    },
+    {
+      "name": "sono-ota-7.5.2.1.zip",
+      "sha256": "7d397da67f2f5e8ae3de6a72585b296cbd0a0d6850a639f1b985d427a123cd57",
+      "parts": [
+        "ota.b64"
+      ]
+    },
+    {
+      "name": "SoNoTapHoa-7.5.2-source.zip",
+      "sha256": "219ab27296f07b5ce79d96c3ca0b5127c941473c4dde6cfc35edce5cfdb9ae7b",
+      "parts": [
+        "source.b64"
+      ]
+    }
+  ]
+}
