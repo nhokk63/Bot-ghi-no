@@ -9,12 +9,12 @@
     "mandatory": false
   },
   "ota": {
-    "versionCode": 7500201,
-    "versionName": "7.5.2.1",
+    "versionCode": 7500202,
+    "versionName": "7.5.2.2",
     "minNativeVersionCode": 75002,
-    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/v7.5.2/sono-ota-7.5.2.1.zip",
-    "sha256": "7d397da67f2f5e8ae3de6a72585b296cbd0a0d6850a639f1b985d427a123cd57",
-    "signature": "wdeowhIzKnjVF8+LojLY74OJIEPa4Xo6v4IrvTM4IylXCjqUZubCQR5zwIOuhq+mWfXJMgDVH6x6PrUnCLex+aPby1FbHe+RbIyPNTjOKSeeFHlVxKVQMXGLz2WJ1zkFsn5kLXm2RGO1FKe63CgzHqGYCgKkcsx4R/wfggLmURcNyCfR8dkEvTvDkdRr6FESWtKJpERH26HBB5P7nX/SkUcpdMlCqKA/Lrm+DXkW9nt6RKSqy60DzPCq38I7Hl9E/dDsIMlvxaHjrtfqN7w43JJ27kwznE2GBpP4+obonrXNswHcBKkniPCerJkjmdRVQ+n3GdP60NmKaCefIvWNEqO4B7Ke3ZmY3/ELueBUHoxxHSGimhnjNQLNgL08yVJCTcMN83aAopXkMAmh6p6rUZHrsoWK382Jnokh9lRz/5RqP9/HLMQxC2xKiOHmSKhTDKAirjNoDRYPIRdC7xp7ajUEsKoPaAFU1qp+RWjBkQbS6T2xegPc40dLjVGBnetF",
-    "notes": "OTA dành cho APK 7.5.2 đã sửa kiểm tra khởi động."
+    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/ota-7.5.2.2/sono-ota-7.5.2.2.zip",
+    "sha256": "b4bb47e8083e3f6784a531b6468ba02eacd5090c469d64b4f56bed5d550a1a18",
+    "signature": "lnemyOTBUnYr/2vfqRhk9/5l5w6q8S62F02X4c21ODgMySLTuWGby2JJQf9cYfc8yxsYwrd8MmH3Pla8nrH9Kf1kKWWVMiYoXCTxntlcxrcgq6zuCekjuSRsCE4jYrhSIArrgA3RKHHvvrN3oWGttyR+ftoTvBdvuRiMgNhIyr3Z3SYLUM4m8jMVfPX4i6w/T1arxHO/59ocVcc11vFVqIpZYJ73gjBOfp5MsDmVMbBYpUXJfhD/9cOGebihPLREasgXPeHbK6HzBxz3qmSC2gRc2QBuiH/i5AY0vncpkCnLNwMkX22+Ev0TIjSCyv2TlV/bmT8SFiFh/RFdOmNNkKSWpVXZMeSjiTYZUae+kndlC823quAbEd157pIftEB9esMZCDLj5dHi8Pn3bGUefMk04UZvOtqV0Do+dQUhlSKI8LBRB8bc41vCDfTdzKmf0P5ko0ZtQ3XEFufZZiq2UkncB4PeiH/oFMKs3Xhgxq97zPqO/0l2nnxD4Xrg3PRo",
+    "notes": "Bản thử OTA: thêm nhãn xanh “OTA thử 7.5.2.2 đã chạy” trong Cài đặt. Không thay đổi JavaScript hoặc dữ liệu."
   }
 }
