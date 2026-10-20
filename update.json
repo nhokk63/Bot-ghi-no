@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "native": {
+    "versionCode": 75001,
+    "versionName": "7.5.1",
+    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/v7.5.1/SoNoTapHoa-7.5.1-release.apk",
+    "sha256": "138468c4424533a6ab987147b9e54483a847b3283d75e7883a8fbd757f2d171b",
+    "notes": "Sửa nguồn cập nhật APK và OTA.",
+    "mandatory": false
+  },
+  "ota": {
+    "versionCode": 7500101,
+    "versionName": "7.5.1.1",
+    "minNativeVersionCode": 75001,
+    "url": "https://github.com/nhokk63/Bot-ghi-no/releases/download/v7.5.1/sono-ota-7.5.1.1.zip",
+    "sha256": "862408314aab8c11204ab7b7d0e803d94c03187bbddfb6c53733c56e55dc31d1",
+    "signature": "e3f2JXRatVYn5yHJ9NDIbBr2muyIDS7ORJFQjr6OjImd0B/J4p6atuqF+G5M7+/s1se0Yq0PH6IF9c+rAoMgJOdW+wrKbqx+rIH9FV/kzy2C0ehBR3adpdidTVvvuqoK+2f99z/I1HiNKwCUII6J9E3qVaIBOYtDF70UvkzTbEBdVap/Luqi9MmDmaUoSvPESSiVc5I2fUH1NW+fg+18lnpzZ4sR3Gvgq2Ov18RiUKkdQU7wIE1fb9zaZpCoXvZcEJckOq+8SRFUBEmjYYtSUysRSH0AokzL2aWfSs6SMBOaFPUtwjKgAJmRg7uXb9rAW3yhXfkA5jJimMZ2Jar1tF29WcexJ+kDRfZaFRB/EtWoGAy5M2kvkxbUHb0pGQwuYiUkciT+mufp8ZwogU6juGZdpJ7DGNAJuefiVyk0QK2vBCpCL+60wSjgyBJDwQY5OnCOsuJ7Ao41ykuam1/2pdHy+q70Yf28eGaqdZe2ljlkmcAtO769TOvHATc5/Q7W",
+    "notes": "Gói OTA nền đã ký; giữ nguyên dữ liệu sổ nợ."
+  }
+}
