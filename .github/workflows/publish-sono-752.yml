@@ -23,4 +23,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create v7.5.2 SoNoTapHoa-7.5.2-release.apk sono-ota-7.5.2.1.zip --title "Sổ Nợ Tạp Hoá 7.5.2" --notes "Sửa reset heartbeat OTA gây rollback nhầm; chặn cập nhật đồng thời; xử lý renderer WebView dừng và lỗi đọc tài nguyên. Cần cài APK để sửa native. Chưa kiểm thử trên điện thoại thật."
+          gh release create v7.5.2 SoNoTapHoa-7.5.2-release.apk sono-ota-7.5.2.1.zip SoNoTapHoa-7.5.2-source.zip --title "Sổ Nợ Tạp Hoá 7.5.2" --notes "Sửa reset heartbeat OTA gây rollback nhầm; chặn cập nhật đồng thời; xử lý renderer WebView dừng và lỗi đọc tài nguyên. Cần cài APK để sửa native. Chưa kiểm thử trên điện thoại thật."
