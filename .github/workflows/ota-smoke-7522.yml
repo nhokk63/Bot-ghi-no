@@ -1,0 +1,25 @@
+name: Publish OTA smoke test 7.5.2.2
+on:
+  push:
+    paths: ['distribution/ota-7.5.2.2/publish.json']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore verified OTA
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,hashlib,base64
+          root=pathlib.Path('distribution/ota-7.5.2.2')
+          meta=json.loads((root/'publish.json').read_text())
+          data=base64.b64decode((root/'payload.b64').read_text(),validate=True)
+          assert hashlib.sha256(data).hexdigest()==meta['sha256']
+          pathlib.Path('sono-ota-7.5.2.2.zip').write_bytes(data)
+          PY
+      - name: Publish signed OTA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create ota-7.5.2.2 sono-ota-7.5.2.2.zip --title "OTA thử 7.5.2.2" --notes "Chỉ thêm nhãn xác nhận OTA trong Cài đặt. JavaScript không thay đổi. Yêu cầu APK 7.5.2."
